@@ -16,6 +16,7 @@
 /// [`array`](https://www.erlang.org/doc/man/array.html) module, which
 /// implements a tree structure for efficient reading and writing.
 ///
+@external(go, "", "Array_t")
 pub type Array(a)
 
 /// Returns an empty array.
@@ -29,18 +30,21 @@ pub type Array(a)
 ///
 @external(erlang, "glearray_ffi", "new")
 @external(javascript, "./glearray_ffi.mjs", "newArray")
+@external(go, "", "New")
 pub fn new() -> Array(a)
 
 /// Converts a list to an array.
 ///
 @external(erlang, "erlang", "list_to_tuple")
 @external(javascript, "./glearray_ffi.mjs", "fromList")
+@external(go, "", "FromList")
 pub fn from_list(list: List(a)) -> Array(a)
 
 /// Converts an array to a list.
 ///
 @external(erlang, "erlang", "tuple_to_list")
 @external(javascript, "./gleam.mjs", "toList")
+@external(go, "", "ToList")
 pub fn to_list(array: Array(a)) -> List(a)
 
 /// Returns the number of elements in the array.
@@ -63,6 +67,7 @@ pub fn to_list(array: Array(a)) -> List(a)
 ///
 @external(erlang, "erlang", "tuple_size")
 @external(javascript, "./glearray_ffi.mjs", "arrayLength")
+@external(go, "", "Length")
 pub fn length(of array: Array(a)) -> Int
 
 /// Returns the element at the specified index, starting from 0.
@@ -95,6 +100,7 @@ pub fn get(in array: Array(a), at index: Int) -> Result(a, Nil) {
 
 @external(erlang, "glearray_ffi", "get")
 @external(javascript, "./glearray_ffi.mjs", "get")
+@external(go, "", "doGet")
 fn do_get(array: Array(a), index: Int) -> a
 
 /// Replaces the element at the given index with `value`.
@@ -133,6 +139,7 @@ pub fn copy_set(
 
 @external(erlang, "glearray_ffi", "set")
 @external(javascript, "./glearray_ffi.mjs", "set")
+@external(go, "", "doSet")
 fn do_set(array: Array(a), index: Int, value: a) -> Array(a)
 
 fn is_valid_index(array: Array(a), index: Int) -> Bool {
@@ -155,6 +162,7 @@ fn is_valid_index(array: Array(a), index: Int) -> Bool {
 ///
 @external(erlang, "erlang", "append_element")
 @external(javascript, "./glearray_ffi.mjs", "push")
+@external(go, "", "CopyPush")
 pub fn copy_push(onto array: Array(a), value value: a) -> Array(a)
 
 /// Inserts an element into the array at the given index.
@@ -207,4 +215,5 @@ pub fn copy_insert(
 
 @external(erlang, "glearray_ffi", "insert")
 @external(javascript, "./glearray_ffi.mjs", "insert")
+@external(go, "", "doInsert")
 fn do_insert(array: Array(a), index: Int, value: a) -> Array(a)
